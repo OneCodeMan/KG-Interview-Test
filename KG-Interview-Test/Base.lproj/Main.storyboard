@@ -128,6 +128,7 @@
                                                 <constraint firstItem="8EL-6V-sXC" firstAttribute="leading" secondItem="cZi-GF-lZY" secondAttribute="leading" constant="10" id="H7n-IU-yeX"/>
                                                 <constraint firstAttribute="trailing" secondItem="8EL-6V-sXC" secondAttribute="trailing" constant="10" id="Rgf-yD-Xct"/>
                                                 <constraint firstItem="s37-is-3wh" firstAttribute="top" secondItem="cZi-GF-lZY" secondAttribute="top" constant="5" id="Y6F-bk-zCe"/>
+                                                <constraint firstAttribute="bottom" secondItem="g48-tT-eZd" secondAttribute="bottom" constant="10.5" id="afv-nE-bsh"/>
                                                 <constraint firstAttribute="trailing" secondItem="s37-is-3wh" secondAttribute="trailing" constant="10" id="fnL-JO-dSm"/>
                                                 <constraint firstItem="g48-tT-eZd" firstAttribute="top" secondItem="Fs4-FK-pby" secondAttribute="bottom" constant="20.5" id="tcq-T3-vWy"/>
                                             </constraints>
