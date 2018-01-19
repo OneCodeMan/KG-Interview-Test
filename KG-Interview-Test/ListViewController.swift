@@ -8,20 +8,41 @@
 
 import UIKit
 
-class ListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ListViewController: UIViewController {
 
     @IBOutlet weak var gamesTableView: UITableView!
     
     @IBOutlet weak var datePicker: UIDatePicker!
+    
+    var dayParam = ""
+    var monthParam = ""
+    var yearParam = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         gamesTableView.delegate = self
         gamesTableView.dataSource = self
-        gamesTableView.rowHeight = UITableViewAutomaticDimension
-        gamesTableView.estimatedRowHeight = 200
+        
+        datePicker.addTarget(self, action: #selector(self.dateChanged), for: .valueChanged)
     }
+    
+    @objc func dateChanged(_ sender: UIDatePicker) {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: sender.date)
+        
+        if let day = components.day, let month = components.month, let year = components.year {
+            dayParam = String(day).count == 1 ? "0\(day)" : "\(day)"
+            monthParam = String(month).count == 1 ? "0\(month)" : "\(month)"
+            yearParam = "\(year)"
+            
+            // get data, update table view
+        }
+    }
+
+}
+
+extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
@@ -34,11 +55,11 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.homeTeamScore?.text = "0"
         cell.awayTeamName?.text = "Blue Jays"
         cell.awayTeamScore?.text = "4"
-        
+    
         cell.status?.text = "Final"
-        
+    
         return cell
+        
     }
-
 
 }

@@ -6,6 +6,7 @@ disabled_rules: # rules to exclude
   - force_cast
 
 opt_in_rules: # rules disabled by default that i want enabled
+  - force_unwrapping
   - closure_spacing
   - closure_end_indentation
   - empty_count
