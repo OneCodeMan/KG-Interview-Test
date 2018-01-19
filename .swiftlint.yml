@@ -1,0 +1,17 @@
+disabled_rules: # rules to exclude
+  - line_length
+  - trailing_whitespace
+  - vertical_whitespace
+  - todo
+
+opt_in_rules: # rules disabled by default that i want enabled
+  - force_unwrapping
+  - closure_spacing
+  - closure_end_indentation
+  - empty_count
+  - implicitly_unwrapped_optional
+  - operator_usage_whitespace
+  - redundant_nil_coalescing
+
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Pods

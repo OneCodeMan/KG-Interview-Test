@@ -96,6 +96,7 @@
 			buildConfigurationList = 1667BBEC201252D5005BD3D1 /* Build configuration list for PBXNativeTarget "KG-Interview-Test" */;
 			buildPhases = (
 				5A254B49855BFE035182F476 /* [CP] Check Pods Manifest.lock */,
+				1667BBEF20125AE0005BD3D1 /* ShellScript */,
 				1667BBD6201252D5005BD3D1 /* Sources */,
 				1667BBD7201252D5005BD3D1 /* Frameworks */,
 				1667BBD8201252D5005BD3D1 /* Resources */,
@@ -173,6 +174,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KG-Interview-Test/Pods-KG-Interview-Test-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		1667BBEF20125AE0005BD3D1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint";
 		};
 		482818837A5681E2AB01D4CC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -253,7 +267,7 @@
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -310,7 +324,7 @@
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;

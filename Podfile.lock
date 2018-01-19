@@ -1,17 +1,20 @@
 PODS:
   - Alamofire (4.6.0)
-  - ChameleonFramework/Default (2.1.0)
-  - ChameleonFramework/Swift (2.1.0):
+  - ChameleonFramework/Default (2.0.6)
+  - ChameleonFramework/Swift (2.0.6):
     - ChameleonFramework/Default
+  - SwiftLint (0.24.2)
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
-  - ChameleonFramework/Swift
+  - ChameleonFramework/Swift (~> 2.0.5)
+  - SwiftLint
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
-  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  ChameleonFramework: a6b466873ff9a4ce3a5196c20bccf1a97ad9f446
+  SwiftLint: 2aa21b96c8d13396a051bc1cb659d2ce1e0075b0
 
-PODFILE CHECKSUM: c733513aa749b62404742b13866743f76a5c7f90
+PODFILE CHECKSUM: 53c7291a1d73c94dfcd4d06797494c8c8b474b50
 
 COCOAPODS: 1.2.1
