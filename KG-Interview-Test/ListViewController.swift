@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import Alamofire
 
 class ListViewController: UIViewController {
 
     @IBOutlet weak var gamesTableView: UITableView!
-    
     @IBOutlet weak var datePicker: UIDatePicker!
+    
+    let baseURL = "http://gd2.mlb.com/components/game/mlb/year_2016/month_10/day_04/master_scoreboard.json"
+    var finalURL = ""
     
     var dayParam = ""
     var monthParam = ""
@@ -27,18 +30,47 @@ class ListViewController: UIViewController {
         datePicker.addTarget(self, action: #selector(self.dateChanged), for: .valueChanged)
     }
     
+    // MARK: Date picker changed
+    
     @objc func dateChanged(_ sender: UIDatePicker) {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day], from: sender.date)
         
         if let day = components.day, let month = components.month, let year = components.year {
+            
             dayParam = String(day).count == 1 ? "0\(day)" : "\(day)"
             monthParam = String(month).count == 1 ? "0\(month)" : "\(month)"
             yearParam = "\(year)"
             
-            // get data, update table view
+            finalURL = "http://gd2.mlb.com/components/game/mlb/year_\(yearParam)/month_\(monthParam)/day_\(dayParam)/master_scoreboard.json"
+            
+            getMLBGameData(url: finalURL)
         }
     }
+    
+    // MARK: Networking
+    func getMLBGameData(url: String) {
+        
+        Alamofire.request(url, method: .get)
+            .responseJSON { response in
+                if response.result.isSuccess {
+                    
+                    print("Sucess! Got the MLB game data")
+                    let gamesJSON : JSON = JSON(response.result.value!)
+                    
+                    // self.updateGameData(json: bitcoinJSON)
+                    
+                } else {
+                    print("Error: \(String(describing: response.result.error))")
+
+                }
+        }
+        
+    }
+
+    
+    
+    // MARK: JSON Parsing
 
 }
 

@@ -4,17 +4,20 @@ PODS:
   - ChameleonFramework/Swift (2.0.6):
     - ChameleonFramework/Default
   - SwiftLint (0.24.2)
+  - SwiftyJSON (4.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.5)
   - ChameleonFramework/Swift (~> 2.0.5)
   - SwiftLint
+  - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
   ChameleonFramework: a6b466873ff9a4ce3a5196c20bccf1a97ad9f446
   SwiftLint: 2aa21b96c8d13396a051bc1cb659d2ce1e0075b0
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 53c7291a1d73c94dfcd4d06797494c8c8b474b50
+PODFILE CHECKSUM: 67e70ab3400a48339060f7bb040d680b1626a468
 
 COCOAPODS: 1.2.1
