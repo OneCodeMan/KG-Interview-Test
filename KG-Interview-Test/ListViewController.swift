@@ -20,15 +20,22 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
         gamesTableView.delegate = self
         gamesTableView.dataSource = self
         gamesTableView.rowHeight = UITableViewAutomaticDimension
-        gamesTableView.estimatedRowHeight = 90
+        gamesTableView.estimatedRowHeight = 200
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = gamesTableView.dequeueReusableCell(withIdentifier: "GameCell", for: indexPath) as! GameCell
+        
+        cell.homeTeamName?.text = "Yankees"
+        cell.homeTeamScore?.text = "0"
+        cell.awayTeamName?.text = "Blue Jays"
+        cell.awayTeamScore?.text = "4"
+        
+        cell.status?.text = "Final"
         
         return cell
     }
