@@ -8,21 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		1667BBDE201252D5005BD3D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1667BBDD201252D5005BD3D1 /* AppDelegate.swift */; };
-		1667BBE0201252D5005BD3D1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1667BBDF201252D5005BD3D1 /* ViewController.swift */; };
+		1667BBE0201252D5005BD3D1 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1667BBDF201252D5005BD3D1 /* ListViewController.swift */; };
 		1667BBE3201252D5005BD3D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1667BBE1201252D5005BD3D1 /* Main.storyboard */; };
 		1667BBE5201252D5005BD3D1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1667BBE4201252D5005BD3D1 /* Assets.xcassets */; };
 		1667BBE8201252D5005BD3D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1667BBE6201252D5005BD3D1 /* LaunchScreen.storyboard */; };
+		1667BBF120129228005BD3D1 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1667BBF020129228005BD3D1 /* GameCell.swift */; };
 		B3C00BEB6A5ECBE372011C1F /* Pods_KG_Interview_Test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E91E19ACA88A215783993F7B /* Pods_KG_Interview_Test.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1667BBDA201252D5005BD3D1 /* KG-Interview-Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "KG-Interview-Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1667BBDD201252D5005BD3D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1667BBDF201252D5005BD3D1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1667BBDF201252D5005BD3D1 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		1667BBE2201252D5005BD3D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1667BBE4201252D5005BD3D1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1667BBE7201252D5005BD3D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1667BBE9201252D5005BD3D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1667BBF020129228005BD3D1 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
 		42457B282E0520A4267BA1D7 /* Pods-KG-Interview-Test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KG-Interview-Test.release.xcconfig"; path = "Pods/Target Support Files/Pods-KG-Interview-Test/Pods-KG-Interview-Test.release.xcconfig"; sourceTree = "<group>"; };
 		BAE6A89F2F29DD5DB2560D6B /* Pods-KG-Interview-Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KG-Interview-Test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KG-Interview-Test/Pods-KG-Interview-Test.debug.xcconfig"; sourceTree = "<group>"; };
 		E91E19ACA88A215783993F7B /* Pods_KG_Interview_Test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KG_Interview_Test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,11 +64,12 @@
 			isa = PBXGroup;
 			children = (
 				1667BBDD201252D5005BD3D1 /* AppDelegate.swift */,
-				1667BBDF201252D5005BD3D1 /* ViewController.swift */,
+				1667BBDF201252D5005BD3D1 /* ListViewController.swift */,
 				1667BBE1201252D5005BD3D1 /* Main.storyboard */,
 				1667BBE4201252D5005BD3D1 /* Assets.xcassets */,
 				1667BBE6201252D5005BD3D1 /* LaunchScreen.storyboard */,
 				1667BBE9201252D5005BD3D1 /* Info.plist */,
+				1667BBF020129228005BD3D1 /* GameCell.swift */,
 			);
 			path = "KG-Interview-Test";
 			sourceTree = "<group>";
@@ -225,8 +228,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1667BBE0201252D5005BD3D1 /* ViewController.swift in Sources */,
+				1667BBE0201252D5005BD3D1 /* ListViewController.swift in Sources */,
 				1667BBDE201252D5005BD3D1 /* AppDelegate.swift in Sources */,
+				1667BBF120129228005BD3D1 /* GameCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
