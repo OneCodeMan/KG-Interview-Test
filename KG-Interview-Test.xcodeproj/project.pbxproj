@@ -65,6 +65,9 @@
 		1667BBDC201252D5005BD3D1 /* KG-Interview-Test */ = {
 			isa = PBXGroup;
 			children = (
+				1667BBF62012C3DE005BD3D1 /* Supporting Files */,
+				1667BBF52012C3D1005BD3D1 /* Helpers */,
+				1667BBF42012C3CD005BD3D1 /* Model */,
 				1667BBDD201252D5005BD3D1 /* AppDelegate.swift */,
 				1667BBDF201252D5005BD3D1 /* ListViewController.swift */,
 				1667BBE1201252D5005BD3D1 /* Main.storyboard */,
@@ -72,9 +75,30 @@
 				1667BBE6201252D5005BD3D1 /* LaunchScreen.storyboard */,
 				1667BBE9201252D5005BD3D1 /* Info.plist */,
 				1667BBF020129228005BD3D1 /* GameCell.swift */,
-				1667BBF22012ABE6005BD3D1 /* Game.swift */,
 			);
 			path = "KG-Interview-Test";
+			sourceTree = "<group>";
+		};
+		1667BBF42012C3CD005BD3D1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1667BBF22012ABE6005BD3D1 /* Game.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1667BBF52012C3D1005BD3D1 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		1667BBF62012C3DE005BD3D1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		261B0BDBDE3451A33B2CED48 /* Frameworks */ = {

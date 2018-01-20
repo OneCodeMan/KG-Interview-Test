@@ -65,7 +65,7 @@ class ListViewController: UIViewController {
                     let resultJSON = JSON(resultValue)
                     let gamesJSON = resultJSON["data"]["games"]["game"]
                     
-                    if gamesJSON != nil {
+                    if gamesJSON != JSON.null {
                         self.updateGameData(gamesJSON: gamesJSON)
                     } else {
                         print("No games")
@@ -83,16 +83,18 @@ class ListViewController: UIViewController {
     // MARK: JSON Parsing
     func updateGameData(gamesJSON: JSON) {
         
-        let onlyOneGame = gamesJSON["home_team_name"] != nil
+        let onlyOneGame = gamesJSON["home_team_name"] != JSON.null
         
         if !onlyOneGame {
             
             for (_, gameJSON) in gamesJSON {
                 let homeTeamName = "\(gameJSON["home_team_name"])"
+                let homeTeamScore = "\(gameJSON["linescore"]["r"]["home"])"
                 let awayTeamName = "\(gameJSON["away_team_name"])"
+                let awayTeamScore = "\(gameJSON["linescore"]["r"]["away"])"
                 let status = "\(gameJSON["status"]["status"])"
                 
-                let game = Game(homeTeam: homeTeamName, homeTeamScore: "0", awayTeam: awayTeamName, awayTeamScore: "0", status: status)
+                let game = Game(homeTeam: homeTeamName, homeTeamScore: homeTeamScore, awayTeam: awayTeamName, awayTeamScore: awayTeamScore, status: status)
                 gamesList.append(game)
             }
             
