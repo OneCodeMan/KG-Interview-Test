@@ -64,13 +64,13 @@ class ListViewController: UIViewController {
             
             finalGameURL = "\(baseURL)/components/game/mlb/year_\(yearParam)/month_\(monthParam)/day_\(dayParam)/master_scoreboard.json"
             
-            getMLBGameData(url: finalGameURL)
+            getMLBGameListData(url: finalGameURL)
         }
     }
     
     // MARK: Networking
     
-    func getMLBGameData(url: String) {
+    func getMLBGameListData(url: String) {
         
         Alamofire.request(url, method: .get)
             .responseJSON { response in

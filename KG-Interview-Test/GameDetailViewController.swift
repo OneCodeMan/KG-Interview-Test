@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class GameDetailViewController: UIViewController {
     
@@ -16,8 +17,39 @@ class GameDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        print(gameDataDirectoryURL)
+        if let gameDataDirectoryURL = gameDataDirectoryURL {
+            getMLBGameDetailData(url: gameDataDirectoryURL)
+        }
+    }
+    
+    func getMLBGameDetailData(url: String) {
+        
+        Alamofire.request(url, method: .get)
+            .responseJSON { response in
+                if response.result.isSuccess {
+                    let resultValue = response.result.value ?? ""
+                    let resultJSON = JSON(resultValue)
+                    let gameDetailJSON = resultJSON["data"]["boxscore"]
+                    
+                    // linescore
+                    let linescoreJSON = gameDetailJSON["linescore"]
+                    print(linescoreJSON)
+                    
+                    // batting
+                    let battingJSON = gameDetailJSON["batting"]
+                    //print(battingJSON)
+                    
+                    let homeTeamCode = "\(gameDetailJSON["home_team_code"])".uppercased()
+                    print(homeTeamCode)
+                    let awayTeamCode = "\(gameDetailJSON["away_team_code"])".uppercased()
+                    print(awayTeamCode)
+                    
+                    
+                } else {
+
+                    
+                }
+        }
     }
 
 }
