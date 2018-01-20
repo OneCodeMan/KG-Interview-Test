@@ -15,7 +15,7 @@ class GameDetailViewController: UIViewController {
     
     // MARK: Inning by inning variables
     @IBOutlet weak var inningSpreadsheetView: SpreadsheetView!
-    var inningInfoHeaders = [String]()
+    var inningInfoHeaders = [""]
     var homeTeamCode = ""
     var homeTeamInnings = [Int]()
     var awayTeamCode = ""
@@ -28,6 +28,9 @@ class GameDetailViewController: UIViewController {
         
         inningSpreadsheetView.delegate = self
         inningSpreadsheetView.dataSource = self
+        
+        inningSpreadsheetView.register(TitleCell.self, forCellWithReuseIdentifier: "TitleCell")
+        inningSpreadsheetView.register(ScoreCell.self, forCellWithReuseIdentifier: "ScoreCell")
         
         if let gameDataDirectoryURL = gameDataDirectoryURL {
             getMLBGameDetailData(url: gameDataDirectoryURL)
@@ -79,6 +82,7 @@ class GameDetailViewController: UIViewController {
                     self.homeTeamInnings += [homeTeamRuns, homeTeamHits, homeTeamErrors]
                     self.awayTeamInnings += [awayTeamRuns, awayTeamHits, awayTeamErrors]
                     
+                    self.inningSpreadsheetView.reloadData()
                     
                     // batting data extraction
                     
@@ -107,19 +111,23 @@ extension GameDetailViewController: SpreadsheetViewDataSource, SpreadsheetViewDe
     }
     
     func numberOfColumns(in spreadsheetView: SpreadsheetView) -> Int {
-        return 14
+        return inningInfoHeaders.count
     }
     
     func numberOfRows(in spreadsheetView: SpreadsheetView) -> Int {
-        return 5
+        return 3
     }
     
-    func frozenColumns(in spreadsheetView: SpreadsheetView) -> Int {
-        return 2
-    }
-    
-    func frozenRows(in spreadsheetView: SpreadsheetView) -> Int {
-        return 1
+    func spreadsheetView(_ spreadsheetView: SpreadsheetView, cellForItemAt indexPath: IndexPath) -> Cell? {
+        
+        if case (1...inningInfoHeaders.count, 0) = (indexPath.column, indexPath.row) {
+            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "TitleCell", for: indexPath) as! TitleCell
+            cell.titleLabel.text = inningInfoHeaders[indexPath.column]
+            return cell
+        } 
+        
+        return nil
+        
     }
     
     
