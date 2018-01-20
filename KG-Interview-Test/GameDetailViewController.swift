@@ -23,7 +23,9 @@ class GameDetailViewController: UIViewController {
     
     // MARK: Batting variables
     @IBOutlet weak var battingTeamPicker: UIPickerView!
+    @IBOutlet weak var battingSpreadsheetView: SpreadsheetView!
     var battingTeamPickerData = [String]()
+    var battingInfoHeaders = ["Name", "AB", "R", "H", "RBI", "BB", "SO", "AVG"]
     
     var gameDataDirectoryURL: String?
 
@@ -42,6 +44,11 @@ class GameDetailViewController: UIViewController {
         battingTeamPicker.dataSource = self
         
         // batting spreadsheetview logic
+        battingSpreadsheetView.delegate = self
+        battingSpreadsheetView.dataSource = self
+        battingSpreadsheetView.register(TitleCell.self, forCellWithReuseIdentifier: "TitleCell")
+        battingSpreadsheetView.register(ScoreCell.self, forCellWithReuseIdentifier: "ScoreCell")
+        
         
         if let gameDataDirectoryURL = gameDataDirectoryURL {
             getMLBGameDetailData(url: gameDataDirectoryURL)
@@ -131,7 +138,11 @@ class GameDetailViewController: UIViewController {
 extension GameDetailViewController: SpreadsheetViewDataSource, SpreadsheetViewDelegate {
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, widthForColumn column: Int) -> CGFloat {
-        return 40
+        if spreadsheetView == inningSpreadsheetView {
+            return 40
+        } else {
+            return 70
+        }
     }
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, heightForRow row: Int) -> CGFloat {
@@ -139,51 +150,82 @@ extension GameDetailViewController: SpreadsheetViewDataSource, SpreadsheetViewDe
     }
     
     func numberOfColumns(in spreadsheetView: SpreadsheetView) -> Int {
-        return inningInfoHeaders.count
+        if spreadsheetView == inningSpreadsheetView {
+            return inningInfoHeaders.count
+        } else {
+            return battingInfoHeaders.count
+        }
     }
     
     func frozenColumns(in spreadsheetView: SpreadsheetView) -> Int {
-        return 1
+        if spreadsheetView == inningSpreadsheetView {
+            return 1
+        }
+        
+        return 0
     }
     
     func numberOfRows(in spreadsheetView: SpreadsheetView) -> Int {
         return 3
     }
     
+    func frozenRows(in spreadsheetView: SpreadsheetView) -> Int {
+        if spreadsheetView == battingSpreadsheetView {
+            return 1
+        }
+        
+        return 0
+    }
+    
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, cellForItemAt indexPath: IndexPath) -> Cell? {
         
-        if !awayTeamInnings.isEmpty && !homeTeamInnings.isEmpty {
+        // inning-by-inning spreadsheet
+        if spreadsheetView == inningSpreadsheetView {
+            if !awayTeamInnings.isEmpty && !homeTeamInnings.isEmpty {
+                
+                switch (indexPath.column, indexPath.row) {
+                case (1...inningInfoHeaders.count, 0):
+                    let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "TitleCell", for: indexPath) as! TitleCell
+                    cell.titleLabel.text = inningInfoHeaders[indexPath.column]
+                    return cell
+                    
+                case (0, 1):
+                    let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "TitleCell", for: indexPath) as! TitleCell
+                    cell.titleLabel.text = homeTeamName
+                    return cell
+                    
+                case (0, 2):
+                    let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "TitleCell", for: indexPath) as! TitleCell
+                    cell.titleLabel.text = awayTeamName
+                    return cell
+                    
+                case (1...homeTeamInnings.count, 1):
+                    let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
+                    cell.scoreLabel.text = "\(homeTeamInnings[indexPath.column - 1])"
+                    return cell
+                    
+                case (1...awayTeamInnings.count, 2):
+                    let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
+                    cell.scoreLabel.text = "\(awayTeamInnings[indexPath.column - 1])"
+                    return cell
+                    
+                default:
+                    return nil
+                }
+            }
+        } else {
+            // batting spreadsheet
             
             switch (indexPath.column, indexPath.row) {
-            case (1...inningInfoHeaders.count, 0):
+            case (0...battingInfoHeaders.count, 0):
                 let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "TitleCell", for: indexPath) as! TitleCell
-                cell.titleLabel.text = inningInfoHeaders[indexPath.column]
+                cell.titleLabel.text = battingInfoHeaders[indexPath.column]
                 return cell
-                
-            case (0, 1):
-                let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "TitleCell", for: indexPath) as! TitleCell
-                cell.titleLabel.text = homeTeamName
-                return cell
-                
-            case (0, 2):
-                let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "TitleCell", for: indexPath) as! TitleCell
-                cell.titleLabel.text = awayTeamName
-                return cell
-                
-            case (1...homeTeamInnings.count, 1):
-                let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
-                cell.scoreLabel.text = "\(homeTeamInnings[indexPath.column - 1])"
-                return cell
-                
-            case (1...awayTeamInnings.count, 2):
-                let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
-                cell.scoreLabel.text = "\(awayTeamInnings[indexPath.column - 1])"
-                return cell
-                
             default:
                 return nil
             }
         }
+    
         return nil
     }
     
