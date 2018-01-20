@@ -229,13 +229,30 @@
                     <view key="view" contentMode="scaleToFill" id="uhg-nU-0sc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PcJ-2h-Sdt" customClass="SpreadsheetView" customModule="SpreadsheetView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="hKg-pO-EIg"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="PcJ-2h-Sdt" firstAttribute="leading" secondItem="83s-X9-8Lm" secondAttribute="leading" id="9Hc-rP-1Ne"/>
+                            <constraint firstItem="PcJ-2h-Sdt" firstAttribute="trailing" secondItem="83s-X9-8Lm" secondAttribute="trailing" id="FNO-Y7-D2d"/>
+                            <constraint firstItem="PcJ-2h-Sdt" firstAttribute="top" secondItem="uhg-nU-0sc" secondAttribute="top" id="STQ-uF-aUV"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="83s-X9-8Lm"/>
                     </view>
+                    <connections>
+                        <outlet property="inningSpreadsheetView" destination="PcJ-2h-Sdt" id="4n0-qD-tHW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TGJ-ck-9F4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1065" y="33"/>
+            <point key="canvasLocation" x="1064.8" y="32.833583208395808"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1Ne-BX-AqJ">
