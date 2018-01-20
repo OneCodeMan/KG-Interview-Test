@@ -36,6 +36,9 @@
                                         <state key="normal" title="Prev">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="prevButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yzP-Ml-hg4"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74a-zc-fsh">
                                         <rect key="frame" x="265" y="29.5" width="90" height="50"/>
@@ -47,6 +50,9 @@
                                         <state key="normal" title="Next">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="nextButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NVl-W3-JA2"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
