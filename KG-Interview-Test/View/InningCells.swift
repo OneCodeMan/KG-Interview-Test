@@ -36,7 +36,7 @@ class ScoreCell: Cell {
         
         scoreLabel.frame = bounds
         scoreLabel.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        scoreLabel.font = UIFont.boldSystemFont(ofSize: 12)
+        scoreLabel.font = UIFont.systemFont(ofSize: 12)
         scoreLabel.textAlignment = .center
         
         contentView.addSubview(scoreLabel)
