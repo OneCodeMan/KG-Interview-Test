@@ -124,6 +124,10 @@ extension GameDetailViewController: SpreadsheetViewDataSource, SpreadsheetViewDe
         return inningInfoHeaders.count
     }
     
+    func frozenColumns(in spreadsheetView: SpreadsheetView) -> Int {
+        return 1
+    }
+    
     func numberOfRows(in spreadsheetView: SpreadsheetView) -> Int {
         return 3
     }
