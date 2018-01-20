@@ -13,6 +13,7 @@ import SwiftyJSON
 class ListViewController: UIViewController {
 
     @IBOutlet weak var gamesTableView: UITableView!
+    @IBOutlet weak var emptyTableView: UIView!
     @IBOutlet weak var datePicker: UIDatePicker!
     
     var finalURL = ""
@@ -48,7 +49,6 @@ class ListViewController: UIViewController {
             yearParam = "\(year)"
             
             finalURL = "http://gd2.mlb.com/components/game/mlb/year_\(yearParam)/month_\(monthParam)/day_\(dayParam)/master_scoreboard.json"
-            print(finalURL)
             
             getMLBGameData(url: finalURL)
         }
@@ -67,9 +67,10 @@ class ListViewController: UIViewController {
                     
                     if gamesJSON != JSON.null {
                         self.updateGameData(gamesJSON: gamesJSON)
+                        self.emptyTableView.isHidden = true
                     } else {
                         print("No games")
-                        // display no games on this date
+                        self.emptyTableView.isHidden = false
                     }
                     
                     
@@ -108,8 +109,7 @@ class ListViewController: UIViewController {
             gamesList.append(game)
             
         }
-            
-        //print(gamesList)
+        
         gamesTableView.reloadData()
     }
 

@@ -57,6 +57,23 @@
                                         <constraint firstItem="SGA-nn-77Z" firstAttribute="leading" secondItem="sbS-R8-aMa" secondAttribute="leading" id="ZxB-3v-VTR"/>
                                     </constraints>
                                 </view>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="smD-uH-CpF">
+                                    <rect key="frame" x="0.0" y="188" width="375" height="128"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No games today" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6s-S0-5wA">
+                                            <rect key="frame" x="124.5" y="53" width="125" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="h6s-S0-5wA" firstAttribute="centerX" secondItem="smD-uH-CpF" secondAttribute="centerX" id="49I-jN-chT"/>
+                                        <constraint firstItem="h6s-S0-5wA" firstAttribute="centerY" secondItem="smD-uH-CpF" secondAttribute="centerY" id="SF6-Tf-7zf"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" selectionStyle="gray" indentationWidth="10" reuseIdentifier="GameCell" rowHeight="90" id="A17-fo-fIF" customClass="GameCell" customModule="KG_Interview_Test" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="98" width="375" height="90"/>
@@ -156,6 +173,7 @@
                     <navigationItem key="navigationItem" title="List of Games" id="LBB-S2-why"/>
                     <connections>
                         <outlet property="datePicker" destination="SGA-nn-77Z" id="1VC-bz-mef"/>
+                        <outlet property="emptyTableView" destination="smD-uH-CpF" id="N4p-Gk-lR7"/>
                         <outlet property="gamesTableView" destination="cMf-v0-i8w" id="1pG-Ad-P5H"/>
                     </connections>
                 </viewController>
