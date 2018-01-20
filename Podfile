@@ -8,7 +8,7 @@ target 'KG-Interview-Test' do
   # Pods for KG-Interview-Test
   pod 'Alamofire', '~> 4.5'
   pod 'SwiftyJSON'
-  pod 'ChameleonFramework/Swift', '~> 2.0.5'
+  pod 'SpreadsheetView'
   pod 'SwiftLint'
 
 end

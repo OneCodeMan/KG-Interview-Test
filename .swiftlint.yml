@@ -4,6 +4,7 @@ disabled_rules: # rules to exclude
   - vertical_whitespace
   - todo
   - force_cast
+  - opening_brace
 
 opt_in_rules: # rules disabled by default that i want enabled
   - force_unwrapping
