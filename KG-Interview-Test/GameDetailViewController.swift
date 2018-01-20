@@ -21,16 +21,27 @@ class GameDetailViewController: UIViewController {
     var awayTeamName = ""
     var awayTeamInnings = [Int]()
     
+    // MARK: Batting variables
+    @IBOutlet weak var battingTeamPicker: UIPickerView!
+    var battingTeamPickerData = [String]()
+    
     var gameDataDirectoryURL: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // inning spreadsheetview logic
         inningSpreadsheetView.delegate = self
         inningSpreadsheetView.dataSource = self
         inningSpreadsheetView.showsHorizontalScrollIndicator = true
         inningSpreadsheetView.register(TitleCell.self, forCellWithReuseIdentifier: "TitleCell")
         inningSpreadsheetView.register(ScoreCell.self, forCellWithReuseIdentifier: "ScoreCell")
+        
+        // batting picker logic
+        battingTeamPicker.delegate = self
+        battingTeamPicker.dataSource = self
+        
+        // batting spreadsheetview logic
         
         if let gameDataDirectoryURL = gameDataDirectoryURL {
             getMLBGameDetailData(url: gameDataDirectoryURL)
@@ -51,21 +62,22 @@ class GameDetailViewController: UIViewController {
                     
                     self.updateInningData(gameDetailJSON: gameDetailJSON)
                     
-                    // batting data extraction
-                    
+                    // batting logic
                     let battingJSON = gameDetailJSON["batting"]
-                    //print(battingJSON)
+                    let homeTeamName = gameDetailJSON["home_fname"]
+                    let awayTeamName = gameDetailJSON["away_fname"]
+                    let teamNames = ["\(homeTeamName)", "\(awayTeamName)"]
                     
-                    
+                    self.updateBattingData(battingJSON: battingJSON, teamNames: teamNames)
                     
                 } else {
-
-                    
+                    print("Network call failed")
                 }
             }
     }
     
-    // MARK: JSON logic
+    // MARK: Innings JSON logic
+    
     func updateInningData(gameDetailJSON: JSON) {
         
         // inning by inning data extraction
@@ -84,7 +96,6 @@ class GameDetailViewController: UIViewController {
         let awayTeamRuns = linescoreJSON["away_team_runs"].intValue,
         awayTeamHits = linescoreJSON["away_team_hits"].intValue,
         awayTeamErrors = linescoreJSON["away_team_errors"].intValue
-        
         
         let inningsJSON = linescoreJSON["inning_line_score"]
         
@@ -106,6 +117,13 @@ class GameDetailViewController: UIViewController {
         
         inningSpreadsheetView.reloadData()
         
+    }
+    
+    // MARK: Batting JSON logic
+    
+    func updateBattingData(battingJSON: JSON, teamNames: [String]) {
+        battingTeamPickerData = teamNames
+        battingTeamPicker.reloadAllComponents()
     }
 
 }
@@ -165,13 +183,29 @@ extension GameDetailViewController: SpreadsheetViewDataSource, SpreadsheetViewDe
             default:
                 return nil
             }
-            
-            
         }
-        
         return nil
-        
     }
     
+}
+
+extension GameDetailViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 2
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        if !battingTeamPickerData.isEmpty {
+            return battingTeamPickerData[row]
+        }
+        
+        return "Loading data..."
+    }
     
 }

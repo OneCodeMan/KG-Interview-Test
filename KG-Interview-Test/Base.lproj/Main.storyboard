@@ -237,16 +237,26 @@
                                     <constraint firstAttribute="height" constant="250" id="hKg-pO-EIg"/>
                                 </constraints>
                             </view>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tXe-tf-8g5">
+                                <rect key="frame" x="0.0" y="250" width="375" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="zcn-ho-17S"/>
+                                </constraints>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="PcJ-2h-Sdt" firstAttribute="leading" secondItem="83s-X9-8Lm" secondAttribute="leading" id="9Hc-rP-1Ne"/>
+                            <constraint firstItem="tXe-tf-8g5" firstAttribute="top" secondItem="PcJ-2h-Sdt" secondAttribute="bottom" id="Agu-T4-390"/>
                             <constraint firstItem="PcJ-2h-Sdt" firstAttribute="trailing" secondItem="83s-X9-8Lm" secondAttribute="trailing" id="FNO-Y7-D2d"/>
+                            <constraint firstItem="tXe-tf-8g5" firstAttribute="trailing" secondItem="83s-X9-8Lm" secondAttribute="trailing" id="JXw-nQ-W8S"/>
+                            <constraint firstItem="tXe-tf-8g5" firstAttribute="leading" secondItem="83s-X9-8Lm" secondAttribute="leading" id="RIX-6f-O62"/>
                             <constraint firstItem="PcJ-2h-Sdt" firstAttribute="top" secondItem="uhg-nU-0sc" secondAttribute="top" id="STQ-uF-aUV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="83s-X9-8Lm"/>
                     </view>
                     <connections>
+                        <outlet property="battingTeamPicker" destination="tXe-tf-8g5" id="tL2-XA-4WR"/>
                         <outlet property="inningSpreadsheetView" destination="PcJ-2h-Sdt" id="4n0-qD-tHW"/>
                     </connections>
                 </viewController>
