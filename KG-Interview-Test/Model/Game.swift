@@ -10,12 +10,12 @@ import Foundation
 
 struct Game {
     let homeTeam: String
-    let homeTeamScore: String
+    let homeTeamScore: Int
     let awayTeam: String
-    let awayTeamScore: String
-    let status: String?
+    let awayTeamScore: Int
+    let status: String
     
-    init(homeTeam: String, homeTeamScore: String, awayTeam: String, awayTeamScore: String, status: String) {
+    init(homeTeam: String, homeTeamScore: Int, awayTeam: String, awayTeamScore: Int, status: String) {
         self.homeTeam = homeTeam
         self.homeTeamScore = homeTeamScore
         self.awayTeam = awayTeam

@@ -69,13 +69,12 @@ class ListViewController: UIViewController {
                         self.updateGameData(gamesJSON: gamesJSON)
                         self.emptyTableView.isHidden = true
                     } else {
-                        print("No games")
                         self.emptyTableView.isHidden = false
                     }
                     
                     
                 } else {
-                    print("Error: \(String(describing: response.result.error))")
+                    self.emptyTableView.isHidden = false
 
                 }
             }
@@ -90,9 +89,9 @@ class ListViewController: UIViewController {
             
             for (_, gameJSON) in gamesJSON {
                 let homeTeamName = "\(gameJSON["home_team_name"])"
-                let homeTeamScore = "\(gameJSON["linescore"]["r"]["home"])"
+                let homeTeamScore = Int("\(gameJSON["linescore"]["r"]["home"])") ?? 0
                 let awayTeamName = "\(gameJSON["away_team_name"])"
-                let awayTeamScore = "\(gameJSON["linescore"]["r"]["away"])"
+                let awayTeamScore = Int("\(gameJSON["linescore"]["r"]["away"])") ?? 0
                 let status = "\(gameJSON["status"]["status"])"
                 
                 let game = Game(homeTeam: homeTeamName, homeTeamScore: homeTeamScore, awayTeam: awayTeamName, awayTeamScore: awayTeamScore, status: status)
@@ -102,10 +101,12 @@ class ListViewController: UIViewController {
         } else {
             
             let homeTeamName = "\(gamesJSON["home_team_name"])"
+            let homeTeamScore = Int("\(gamesJSON["linescore"]["r"]["home"])") ?? 0
             let awayTeamName = "\(gamesJSON["away_team_name"])"
+            let awayTeamScore = Int("\(gamesJSON["linescore"]["r"]["away"])") ?? 0
             let status = "\(gamesJSON["status"]["status"])"
             
-            let game = Game(homeTeam: homeTeamName, homeTeamScore: "0", awayTeam: awayTeamName, awayTeamScore: "0", status: status)
+            let game = Game(homeTeam: homeTeamName, homeTeamScore: homeTeamScore, awayTeam: awayTeamName, awayTeamScore: awayTeamScore, status: status)
             gamesList.append(game)
             
         }
@@ -126,11 +127,21 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         let game = gamesList[indexPath.row]
         
         cell.homeTeamName?.text = game.homeTeam
-        cell.homeTeamScore?.text = game.homeTeamScore
+        cell.homeTeamName?.font = UIFont.systemFont(ofSize: 15)
+        cell.homeTeamScore?.text = "\(game.homeTeamScore)"
+        
         cell.awayTeamName?.text = game.awayTeam
-        cell.awayTeamScore?.text = game.awayTeamScore
+        cell.awayTeamName?.font = UIFont.systemFont(ofSize: 15)
+        cell.awayTeamScore?.text = "\(game.awayTeamScore)"
     
         cell.status?.text = game.status
+        
+        // bold the winning team for current game row
+        if game.homeTeamScore > game.awayTeamScore {
+            cell.homeTeamName?.font = UIFont.boldSystemFont(ofSize: 15)
+        } else if game.awayTeamScore > game.homeTeamScore {
+            cell.awayTeamName?.font = UIFont.boldSystemFont(ofSize: 15)
+        }
     
         return cell
         
