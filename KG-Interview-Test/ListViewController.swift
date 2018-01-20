@@ -16,9 +16,21 @@ class ListViewController: UIViewController {
     @IBOutlet weak var emptyTableView: UIView!
     @IBOutlet weak var datePicker: UIDatePicker!
     
+    @IBAction func prevButtonClicked(_ sender: Any) {
+        datePicker.date = datePicker.date.previousDay
+        self.dateChanged(datePicker)
+    }
+    
+    @IBAction func nextButtonClicked(_ sender: Any) {
+        datePicker.date = datePicker.date.nextDay
+        self.dateChanged(datePicker)
+    }
+    
     var finalURL = ""
     var gamesList = [Game]()
     var favoriteTeam = "Blue Jays"
+    
+    var currentDatePickerValue = Date()
     
     var dayParam = ""
     var monthParam = ""

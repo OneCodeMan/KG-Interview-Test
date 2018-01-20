@@ -14,6 +14,7 @@
 		1667BBE8201252D5005BD3D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1667BBE6201252D5005BD3D1 /* LaunchScreen.storyboard */; };
 		1667BBF120129228005BD3D1 /* GameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1667BBF020129228005BD3D1 /* GameCell.swift */; };
 		1667BBF32012ABE6005BD3D1 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1667BBF22012ABE6005BD3D1 /* Game.swift */; };
+		1667BBF92012E04B005BD3D1 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1667BBF82012E04B005BD3D1 /* DateExtension.swift */; };
 		B3C00BEB6A5ECBE372011C1F /* Pods_KG_Interview_Test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E91E19ACA88A215783993F7B /* Pods_KG_Interview_Test.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		1667BBE9201252D5005BD3D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1667BBF020129228005BD3D1 /* GameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCell.swift; sourceTree = "<group>"; };
 		1667BBF22012ABE6005BD3D1 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		1667BBF82012E04B005BD3D1 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		42457B282E0520A4267BA1D7 /* Pods-KG-Interview-Test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KG-Interview-Test.release.xcconfig"; path = "Pods/Target Support Files/Pods-KG-Interview-Test/Pods-KG-Interview-Test.release.xcconfig"; sourceTree = "<group>"; };
 		BAE6A89F2F29DD5DB2560D6B /* Pods-KG-Interview-Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KG-Interview-Test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KG-Interview-Test/Pods-KG-Interview-Test.debug.xcconfig"; sourceTree = "<group>"; };
 		E91E19ACA88A215783993F7B /* Pods_KG_Interview_Test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KG_Interview_Test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +67,7 @@
 		1667BBDC201252D5005BD3D1 /* KG-Interview-Test */ = {
 			isa = PBXGroup;
 			children = (
+				1667BBF72012E03D005BD3D1 /* Extensions */,
 				1667BBF62012C3DE005BD3D1 /* Supporting Files */,
 				1667BBF52012C3D1005BD3D1 /* Helpers */,
 				1667BBF42012C3CD005BD3D1 /* Model */,
@@ -99,6 +102,14 @@
 			children = (
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1667BBF72012E03D005BD3D1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1667BBF82012E04B005BD3D1 /* DateExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		261B0BDBDE3451A33B2CED48 /* Frameworks */ = {
@@ -256,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1667BBE0201252D5005BD3D1 /* ListViewController.swift in Sources */,
+				1667BBF92012E04B005BD3D1 /* DateExtension.swift in Sources */,
 				1667BBDE201252D5005BD3D1 /* AppDelegate.swift in Sources */,
 				1667BBF120129228005BD3D1 /* GameCell.swift in Sources */,
 				1667BBF32012ABE6005BD3D1 /* Game.swift in Sources */,
