@@ -117,7 +117,7 @@ extension GameDetailViewController: SpreadsheetViewDataSource, SpreadsheetViewDe
     }
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, heightForRow row: Int) -> CGFloat {
-        return 60
+        return 50
     }
     
     func numberOfColumns(in spreadsheetView: SpreadsheetView) -> Int {
@@ -130,40 +130,39 @@ extension GameDetailViewController: SpreadsheetViewDataSource, SpreadsheetViewDe
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, cellForItemAt indexPath: IndexPath) -> Cell? {
         
-        if case (1...inningInfoHeaders.count, 0) = (indexPath.column, indexPath.row) {
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "TitleCell", for: indexPath) as! TitleCell
-            cell.titleLabel.text = inningInfoHeaders[indexPath.column]
-            return cell
-        }
-        
-        if case (0, 1) = (indexPath.column, indexPath.row) {
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "TitleCell", for: indexPath) as! TitleCell
-            cell.titleLabel.text = homeTeamName
-            return cell
-        }
-        
-        if case (0, 2) = (indexPath.column, indexPath.row) {
-            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "TitleCell", for: indexPath) as! TitleCell
-            cell.titleLabel.text = awayTeamName
-            return cell
-        }
-        
-        if !homeTeamInnings.isEmpty {
-            if case (1...homeTeamInnings.count, 1) = (indexPath.column, indexPath.row) {
+        if !awayTeamInnings.isEmpty && !homeTeamInnings.isEmpty {
+            
+            switch (indexPath.column, indexPath.row) {
+            case (1...inningInfoHeaders.count, 0):
+                let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "TitleCell", for: indexPath) as! TitleCell
+                cell.titleLabel.text = inningInfoHeaders[indexPath.column]
+                return cell
+                
+            case (0, 1):
+                let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "TitleCell", for: indexPath) as! TitleCell
+                cell.titleLabel.text = homeTeamName
+                return cell
+                
+            case (0, 2):
+                let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "TitleCell", for: indexPath) as! TitleCell
+                cell.titleLabel.text = awayTeamName
+                return cell
+                
+            case (1...homeTeamInnings.count, 1):
                 let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
                 cell.scoreLabel.text = "\(homeTeamInnings[indexPath.column - 1])"
                 return cell
                 
-            }
-        }
-        
-        if !awayTeamInnings.isEmpty {
-            if case (1...awayTeamInnings.count, 2) = (indexPath.column, indexPath.row) {
+            case (1...awayTeamInnings.count, 2):
                 let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
                 cell.scoreLabel.text = "\(awayTeamInnings[indexPath.column - 1])"
                 return cell
                 
+            default:
+                return nil
             }
+            
+            
         }
         
         return nil
