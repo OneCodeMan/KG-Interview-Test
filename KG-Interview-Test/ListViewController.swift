@@ -26,7 +26,8 @@ class ListViewController: UIViewController {
         self.dateChanged(datePicker)
     }
     
-    var finalURL = ""
+    let baseURL = "http://gd2.mlb.com"
+    var finalGameURL = ""
     var gamesList = [Game]()
     var favoriteTeam = "Blue Jays"
     
@@ -61,9 +62,9 @@ class ListViewController: UIViewController {
             monthParam = String(month).count == 1 ? "0\(month)" : "\(month)"
             yearParam = "\(year)"
             
-            finalURL = "http://gd2.mlb.com/components/game/mlb/year_\(yearParam)/month_\(monthParam)/day_\(dayParam)/master_scoreboard.json"
+            finalGameURL = "\(baseURL)/components/game/mlb/year_\(yearParam)/month_\(monthParam)/day_\(dayParam)/master_scoreboard.json"
             
-            getMLBGameData(url: finalURL)
+            getMLBGameData(url: finalGameURL)
         }
     }
     
@@ -94,6 +95,7 @@ class ListViewController: UIViewController {
     }
     
     // MARK: JSON Parsing
+    
     func updateGameData(gamesJSON: JSON) {
         
         let onlyOneGame = gamesJSON["home_team_name"] != JSON.null
@@ -108,7 +110,10 @@ class ListViewController: UIViewController {
                 let awayTeamScore = Int("\(gameJSON["linescore"]["r"]["away"])") ?? 0
                 let status = "\(gameJSON["status"]["status"])"
                 
-                let game = Game(homeTeam: homeTeamName, homeTeamScore: homeTeamScore, awayTeam: awayTeamName, awayTeamScore: awayTeamScore, status: status)
+                let dataDirectoryExists = gameJSON["game_data_directory"] != JSON.null
+                let dataDirectory = dataDirectoryExists ? "\(gameJSON["game_data_directory"])" : ""
+                
+                let game = Game(homeTeam: homeTeamName, homeTeamScore: homeTeamScore, awayTeam: awayTeamName, awayTeamScore: awayTeamScore, status: status, dataDirectory: dataDirectory)
                 
                 // if favorite team appears, insert it at the beginning of gamesList
                 if game.homeTeam == favoriteTeam || game.awayTeam == favoriteTeam {
@@ -126,7 +131,11 @@ class ListViewController: UIViewController {
             let awayTeamScore = Int("\(gamesJSON["linescore"]["r"]["away"])") ?? 0
             let status = "\(gamesJSON["status"]["status"])"
             
-            let game = Game(homeTeam: homeTeamName, homeTeamScore: homeTeamScore, awayTeam: awayTeamName, awayTeamScore: awayTeamScore, status: status)
+            let dataDirectoryExists = gamesJSON["game_data_directory"] != JSON.null
+            let dataDirectory = dataDirectoryExists ? "\(gamesJSON["game_data_directory"])" : ""
+            
+            let game = Game(homeTeam: homeTeamName, homeTeamScore: homeTeamScore, awayTeam: awayTeamName, awayTeamScore: awayTeamScore, status: status,
+                            dataDirectory: dataDirectory)
             gamesList.append(game)
         }
         
@@ -164,6 +173,19 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     
         return cell
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let selectedGame = gamesList[indexPath.row]
+        
+        if !selectedGame.dataDirectory.isEmpty {
+        
+            if let vc = storyboard?.instantiateViewController(withIdentifier: "GameDetail") as? GameDetailViewController {
+                vc.gameDataDirectoryURL = gamesList[indexPath.row].dataDirectory
+                navigationController?.pushViewController(vc, animated: true)
+            }
+        }
     }
 
 }

@@ -14,13 +14,15 @@ struct Game {
     let awayTeam: String
     let awayTeamScore: Int
     let status: String
+    let dataDirectory: String
     
-    init(homeTeam: String, homeTeamScore: Int, awayTeam: String, awayTeamScore: Int, status: String) {
+    init(homeTeam: String, homeTeamScore: Int, awayTeam: String, awayTeamScore: Int, status: String, dataDirectory: String) {
         self.homeTeam = homeTeam
         self.homeTeamScore = homeTeamScore
         self.awayTeam = awayTeam
         self.awayTeamScore = awayTeamScore
         self.status = status
+        self.dataDirectory = dataDirectory
     }
     
 }
