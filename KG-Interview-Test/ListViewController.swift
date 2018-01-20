@@ -182,7 +182,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         if !selectedGame.dataDirectory.isEmpty {
         
             if let vc = storyboard?.instantiateViewController(withIdentifier: "GameDetail") as? GameDetailViewController {
-                vc.gameDataDirectoryURL = gamesList[indexPath.row].dataDirectory
+                vc.gameDataDirectoryURL = "\(baseURL)\(gamesList[indexPath.row].dataDirectory)/boxscore.json"
                 navigationController?.pushViewController(vc, animated: true)
             }
         }
