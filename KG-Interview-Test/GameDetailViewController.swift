@@ -99,7 +99,7 @@ class GameDetailViewController: UIViewController {
 extension GameDetailViewController: SpreadsheetViewDataSource, SpreadsheetViewDelegate {
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, widthForColumn column: Int) -> CGFloat {
-        return 80
+        return 40
     }
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, heightForRow row: Int) -> CGFloat {
@@ -107,11 +107,19 @@ extension GameDetailViewController: SpreadsheetViewDataSource, SpreadsheetViewDe
     }
     
     func numberOfColumns(in spreadsheetView: SpreadsheetView) -> Int {
-        return 5
+        return 14
     }
     
     func numberOfRows(in spreadsheetView: SpreadsheetView) -> Int {
         return 5
+    }
+    
+    func frozenColumns(in spreadsheetView: SpreadsheetView) -> Int {
+        return 2
+    }
+    
+    func frozenRows(in spreadsheetView: SpreadsheetView) -> Int {
+        return 1
     }
     
     
