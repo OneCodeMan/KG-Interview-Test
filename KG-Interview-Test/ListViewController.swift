@@ -55,6 +55,7 @@ class ListViewController: UIViewController {
     }
     
     // MARK: Networking
+    
     func getMLBGameData(url: String) {
         
         Alamofire.request(url, method: .get)
@@ -72,7 +73,6 @@ class ListViewController: UIViewController {
                         self.emptyTableView.isHidden = false
                     }
                     
-                    
                 } else {
                     self.emptyTableView.isHidden = false
 
@@ -86,6 +86,7 @@ class ListViewController: UIViewController {
         let onlyOneGame = gamesJSON["home_team_name"] != JSON.null
         
         if !onlyOneGame {
+            // "favorite team being the first row" logic is only needed to be implemented when there's more than one game, only needs to be here
             
             for (_, gameJSON) in gamesJSON {
                 let homeTeamName = "\(gameJSON["home_team_name"])"
