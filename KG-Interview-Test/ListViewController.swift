@@ -18,6 +18,7 @@ class ListViewController: UIViewController {
     
     var finalURL = ""
     var gamesList = [Game]()
+    var favoriteTeam = "Blue Jays"
     
     var dayParam = ""
     var monthParam = ""
@@ -86,7 +87,7 @@ class ListViewController: UIViewController {
         let onlyOneGame = gamesJSON["home_team_name"] != JSON.null
         
         if !onlyOneGame {
-            // "favorite team being the first row" logic is only needed to be implemented when there's more than one game, only needs to be here
+            // "favorite team being the first row" logic is only needed to be implemented when there's more than one game, only needs to be in this if block
             
             for (_, gameJSON) in gamesJSON {
                 let homeTeamName = "\(gameJSON["home_team_name"])"
@@ -96,7 +97,13 @@ class ListViewController: UIViewController {
                 let status = "\(gameJSON["status"]["status"])"
                 
                 let game = Game(homeTeam: homeTeamName, homeTeamScore: homeTeamScore, awayTeam: awayTeamName, awayTeamScore: awayTeamScore, status: status)
-                gamesList.append(game)
+                
+                // if favorite team appears, insert it at the beginning of gamesList
+                if game.homeTeam == favoriteTeam || game.awayTeam == favoriteTeam {
+                    gamesList.insert(game, at: 0)
+                } else {
+                    gamesList.append(game)
+                }
             }
             
         } else {
@@ -109,7 +116,6 @@ class ListViewController: UIViewController {
             
             let game = Game(homeTeam: homeTeamName, homeTeamScore: homeTeamScore, awayTeam: awayTeamName, awayTeamScore: awayTeamScore, status: status)
             gamesList.append(game)
-            
         }
         
         gamesTableView.reloadData()
