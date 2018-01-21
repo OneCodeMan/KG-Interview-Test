@@ -5,7 +5,9 @@ disabled_rules: # rules to exclude
   - todo
   - force_cast
   - opening_brace
-
+  - cyclomatic_complexity
+  - function_body_length
+  
 opt_in_rules: # rules disabled by default that i want enabled
   - force_unwrapping
   - closure_spacing

@@ -71,15 +71,11 @@
 		1667BBDC201252D5005BD3D1 /* KG-Interview-Test */ = {
 			isa = PBXGroup;
 			children = (
-				16D96EDF2013DECF00E0E9ED /* View */,
-				1667BBF72012E03D005BD3D1 /* Extensions */,
-				1667BBF62012C3DE005BD3D1 /* Supporting Files */,
-				1667BBF52012C3D1005BD3D1 /* Helpers */,
 				1667BBF42012C3CD005BD3D1 /* Model */,
+				16D96EDF2013DECF00E0E9ED /* View */,
+				16D96EE920142F2400E0E9ED /* Controller */,
+				1667BBF72012E03D005BD3D1 /* Extensions */,
 				1667BBDD201252D5005BD3D1 /* AppDelegate.swift */,
-				1667BBDF201252D5005BD3D1 /* ListViewController.swift */,
-				1667BBFA2012ECA8005BD3D1 /* GameDetailViewController.swift */,
-				1667BBE1201252D5005BD3D1 /* Main.storyboard */,
 				1667BBE4201252D5005BD3D1 /* Assets.xcassets */,
 				1667BBE6201252D5005BD3D1 /* LaunchScreen.storyboard */,
 				1667BBE9201252D5005BD3D1 /* Info.plist */,
@@ -95,20 +91,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		1667BBF52012C3D1005BD3D1 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		1667BBF62012C3DE005BD3D1 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		1667BBF72012E03D005BD3D1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,10 +102,20 @@
 		16D96EDF2013DECF00E0E9ED /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1667BBE1201252D5005BD3D1 /* Main.storyboard */,
 				1667BBF020129228005BD3D1 /* GameCell.swift */,
 				16D96EE02013DEF200E0E9ED /* SpreadsheetCells.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		16D96EE920142F2400E0E9ED /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				1667BBDF201252D5005BD3D1 /* ListViewController.swift */,
+				1667BBFA2012ECA8005BD3D1 /* GameDetailViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		261B0BDBDE3451A33B2CED48 /* Frameworks */ = {
@@ -433,7 +425,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "gumbad.KG-Interview-Test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -449,7 +441,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "gumbad.KG-Interview-Test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
