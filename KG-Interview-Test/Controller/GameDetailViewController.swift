@@ -13,6 +13,8 @@ import SpreadsheetView
 
 class GameDetailViewController: UIViewController {
     
+    @IBOutlet weak var networkCallFailView: UIView!
+    
     // MARK: Inning by inning variables
     @IBOutlet weak var inningSpreadsheetView: SpreadsheetView!
     var inningInfoHeaders = [""]
@@ -36,6 +38,8 @@ class GameDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        networkCallFailView.isHidden = true
         
         // inning spreadsheetview logic
         inningSpreadsheetView.delegate = self
@@ -66,6 +70,8 @@ class GameDetailViewController: UIViewController {
             .responseJSON { response in
                 if response.result.isSuccess {
                     
+                    self.networkCallFailView.isHidden = true
+                    
                     let resultValue = response.result.value ?? ""
                     let resultJSON = JSON(resultValue)
                     let gameDetailJSON = resultJSON["data"]["boxscore"]
@@ -81,7 +87,7 @@ class GameDetailViewController: UIViewController {
                     self.updateBattingData(battingJSON: battingJSON, teamNames: self.teamNames)
                     
                 } else {
-                    print("Network call failed")
+                    self.networkCallFailView.isHidden = false
                 }
             }
     }
