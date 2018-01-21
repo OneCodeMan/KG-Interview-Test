@@ -73,7 +73,6 @@
 			children = (
 				16D96EDF2013DECF00E0E9ED /* View */,
 				1667BBF72012E03D005BD3D1 /* Extensions */,
-				1667BBF62012C3DE005BD3D1 /* Supporting Files */,
 				1667BBF52012C3D1005BD3D1 /* Helpers */,
 				1667BBF42012C3CD005BD3D1 /* Model */,
 				1667BBDD201252D5005BD3D1 /* AppDelegate.swift */,
@@ -100,13 +99,6 @@
 			children = (
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		1667BBF62012C3DE005BD3D1 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		1667BBF72012E03D005BD3D1 /* Extensions */ = {

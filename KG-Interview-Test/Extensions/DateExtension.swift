@@ -11,9 +11,11 @@ import Foundation
 extension Date {
     
     var previousDay: Date {
-        return Calendar.current.date(byAdding: .day, value: -1, to: self)!
+        let newDate = Calendar.current.date(byAdding: .day, value: -1, to: self) ?? self
+        return newDate
     }
     var nextDay: Date {
-        return Calendar.current.date(byAdding: .day, value: 1, to: self)!
+        let newDate = Calendar.current.date(byAdding: .day, value: 1, to: self) ?? self
+        return newDate
     }
 }

@@ -104,14 +104,14 @@ class ListViewController: UIViewController {
             // "favorite team being the first row" logic is only needed to be implemented when there's more than one game, only needs to be in this if block
             
             for (_, gameJSON) in gamesJSON {
-                let homeTeamName = "\(gameJSON["home_team_name"])"
-                let homeTeamScore = Int("\(gameJSON["linescore"]["r"]["home"])") ?? 0
-                let awayTeamName = "\(gameJSON["away_team_name"])"
-                let awayTeamScore = Int("\(gameJSON["linescore"]["r"]["away"])") ?? 0
-                let status = "\(gameJSON["status"]["status"])"
+                let homeTeamName = gameJSON["home_team_name"].stringValue
+                let homeTeamScore = gameJSON["linescore"]["r"]["home"].intValue
+                let awayTeamName = gameJSON["away_team_name"].stringValue
+                let awayTeamScore = gameJSON["linescore"]["r"]["away"].intValue
+                let status = gameJSON["status"]["status"].stringValue
                 
                 let dataDirectoryExists = gameJSON["game_data_directory"] != JSON.null
-                let dataDirectory = dataDirectoryExists ? "\(gameJSON["game_data_directory"])" : ""
+                let dataDirectory = dataDirectoryExists ? gameJSON["game_data_directory"].stringValue : ""
                 
                 let game = Game(homeTeam: homeTeamName, homeTeamScore: homeTeamScore, awayTeam: awayTeamName, awayTeamScore: awayTeamScore, status: status, dataDirectory: dataDirectory)
                 
@@ -125,14 +125,15 @@ class ListViewController: UIViewController {
             
         } else {
             
-            let homeTeamName = "\(gamesJSON["home_team_name"])"
-            let homeTeamScore = Int("\(gamesJSON["linescore"]["r"]["home"])") ?? 0
-            let awayTeamName = "\(gamesJSON["away_team_name"])"
-            let awayTeamScore = Int("\(gamesJSON["linescore"]["r"]["away"])") ?? 0
-            let status = "\(gamesJSON["status"]["status"])"
+            let homeTeamName = gamesJSON["home_team_name"].stringValue
+            let homeTeamScore = gamesJSON["linescore"]["r"]["home"].intValue
+            
+            let awayTeamName = gamesJSON["away_team_name"].stringValue
+            let awayTeamScore = gamesJSON["linescore"]["r"]["away"].intValue
+            let status = gamesJSON["status"]["status"].stringValue
             
             let dataDirectoryExists = gamesJSON["game_data_directory"] != JSON.null
-            let dataDirectory = dataDirectoryExists ? "\(gamesJSON["game_data_directory"])" : ""
+            let dataDirectory = dataDirectoryExists ? gamesJSON["game_data_directory"].stringValue : ""
             
             let game = Game(homeTeam: homeTeamName, homeTeamScore: homeTeamScore, awayTeam: awayTeamName, awayTeamScore: awayTeamScore, status: status,
                             dataDirectory: dataDirectory)

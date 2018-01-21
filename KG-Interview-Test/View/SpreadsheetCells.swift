@@ -46,5 +46,3 @@ class ScoreCell: Cell {
         super.init(coder: aDecoder)
     }
 }
-
-

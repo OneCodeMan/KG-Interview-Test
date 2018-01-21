@@ -90,8 +90,8 @@ class GameDetailViewController: UIViewController {
     func updateInningData(gameDetailJSON: JSON) {
         
         // inning by inning data extraction
-        let homeTeamCode = "\(gameDetailJSON["home_team_code"])",
-            awayTeamCode = "\(gameDetailJSON["away_team_code"])"
+        let homeTeamCode = gameDetailJSON["home_team_code"].stringValue,
+            awayTeamCode = gameDetailJSON["away_team_code"].stringValue
         
         homeTeamName = homeTeamCode.uppercased()
         awayTeamName = awayTeamCode.uppercased()
@@ -99,18 +99,18 @@ class GameDetailViewController: UIViewController {
         let linescoreJSON = gameDetailJSON["linescore"]
         
         let homeTeamRuns = linescoreJSON["home_team_runs"].intValue,
-        homeTeamHits = linescoreJSON["home_team_hits"].intValue,
-        homeTeamErrors = linescoreJSON["home_team_errors"].intValue
+            homeTeamHits = linescoreJSON["home_team_hits"].intValue,
+            homeTeamErrors = linescoreJSON["home_team_errors"].intValue
         
         let awayTeamRuns = linescoreJSON["away_team_runs"].intValue,
-        awayTeamHits = linescoreJSON["away_team_hits"].intValue,
-        awayTeamErrors = linescoreJSON["away_team_errors"].intValue
+            awayTeamHits = linescoreJSON["away_team_hits"].intValue,
+            awayTeamErrors = linescoreJSON["away_team_errors"].intValue
         
         let inningsJSON = linescoreJSON["inning_line_score"]
         
         for (_, inning) in inningsJSON {
             
-            let inningNumber = "\(inning["inning"])"
+            let inningNumber = inning["inning"].stringValue
             let homeInning = inning["home"].intValue
             let awayInning = inning["away"].intValue
             
@@ -159,13 +159,13 @@ class GameDetailViewController: UIViewController {
             for awayTeamBatter in awayTeamBattersJSON {
                 
                 let batterName = awayTeamBatter["name"].stringValue,
-                batterAB = awayTeamBatter["ab"].stringValue,
-                batterR = awayTeamBatter["r"].stringValue,
-                batterH = awayTeamBatter["h"].stringValue,
-                batterRBI = awayTeamBatter["rbi"].stringValue,
-                batterBB = awayTeamBatter["bb"].stringValue,
-                batterSO = awayTeamBatter["so"].stringValue,
-                batterAVG = awayTeamBatter["avg"].stringValue
+                    batterAB = awayTeamBatter["ab"].stringValue,
+                    batterR = awayTeamBatter["r"].stringValue,
+                    batterH = awayTeamBatter["h"].stringValue,
+                    batterRBI = awayTeamBatter["rbi"].stringValue,
+                    batterBB = awayTeamBatter["bb"].stringValue,
+                    batterSO = awayTeamBatter["so"].stringValue,
+                    batterAVG = awayTeamBatter["avg"].stringValue
                 
                 let awayTeamBatterInstance = [batterName, batterAB, batterR, batterH, batterRBI, batterBB, batterSO, batterAVG]
                 awayTeamBatters.append(awayTeamBatterInstance)
@@ -174,7 +174,6 @@ class GameDetailViewController: UIViewController {
             
             batters = [homeTeamBatters, awayTeamBatters]
             battingSpreadsheetView.reloadData()
-            
             
         }
         
