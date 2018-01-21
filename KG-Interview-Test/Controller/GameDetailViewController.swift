@@ -23,6 +23,8 @@ class GameDetailViewController: UIViewController {
     var awayTeamName = ""
     var awayTeamInnings = [Int]()
     
+    let inningSpreadsheetViewCellWidth: CGFloat = 90
+    
     // MARK: - Batting variables
     @IBOutlet weak var battingTeamPicker: UIPickerView!
     @IBOutlet weak var battingSpreadsheetView: SpreadsheetView!
@@ -33,6 +35,10 @@ class GameDetailViewController: UIViewController {
     var homeTeamBatters = [[String]]()
     var awayTeamBatters = [[String]]()
     var batters = [[[String]]]()
+    
+    let battingSpreadsheetViewCellWidth: CGFloat = 110
+    
+    let spreadsheetViewCellHeight: CGFloat = 50
     
     var gameDataDirectoryURL: String?
 
@@ -191,14 +197,14 @@ extension GameDetailViewController: SpreadsheetViewDataSource, SpreadsheetViewDe
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, widthForColumn column: Int) -> CGFloat {
         if spreadsheetView == inningSpreadsheetView {
-            return 40
+            return inningSpreadsheetViewCellWidth
         } else {
-            return 110
+            return battingSpreadsheetViewCellWidth
         }
     }
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, heightForRow row: Int) -> CGFloat {
-        return 50
+        return spreadsheetViewCellHeight
     }
     
     func numberOfColumns(in spreadsheetView: SpreadsheetView) -> Int {
