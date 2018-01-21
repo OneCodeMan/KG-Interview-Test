@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Game {
+class Game {
     let homeTeam: String
     let homeTeamScore: Int
     let awayTeam: String
