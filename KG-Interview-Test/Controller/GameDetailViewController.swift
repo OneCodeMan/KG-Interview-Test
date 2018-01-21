@@ -222,7 +222,7 @@ extension GameDetailViewController: SpreadsheetViewDataSource, SpreadsheetViewDe
         } else {
             
             if !homeTeamBatters.isEmpty && !awayTeamBatters.isEmpty {
-                return batters[battingTeamPickerIndex].count
+                return batters[battingTeamPickerIndex].count + 1
             }
         }
         return 1
@@ -277,6 +277,7 @@ extension GameDetailViewController: SpreadsheetViewDataSource, SpreadsheetViewDe
             if !homeTeamBatters.isEmpty && !awayTeamBatters.isEmpty {
                 
                 let currentTeam = batters[battingTeamPickerIndex]
+                let currentRange = currentTeam.count
                 
                 switch (indexPath.column, indexPath.row) {
                 case (0...battingInfoHeaders.count, 0):
@@ -284,43 +285,42 @@ extension GameDetailViewController: SpreadsheetViewDataSource, SpreadsheetViewDe
                     cell.titleLabel.text = battingInfoHeaders[indexPath.column]
                     return cell
                     
-                case (0, 1...currentTeam.count):
-                    
+                case (0, 1...currentRange):
                     let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
                     cell.scoreLabel.text = currentTeam[indexPath.row - 1][0]
                     return cell
                     
-                case (1, 1...currentTeam.count):
+                case (1, 1...currentRange):
                     let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
                     cell.scoreLabel.text = currentTeam[indexPath.row - 1][1]
                     return cell
                     
-                case (2, 1...currentTeam.count):
+                case (2, 1...currentRange):
                     let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
                     cell.scoreLabel.text = currentTeam[indexPath.row - 1][2]
                     return cell
                     
-                case (3, 1...currentTeam.count):
+                case (3, 1...currentRange):
                     let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
                     cell.scoreLabel.text = currentTeam[indexPath.row - 1][3]
                     return cell
                     
-                case (4, 1...currentTeam.count):
+                case (4, 1...currentRange):
                     let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
                     cell.scoreLabel.text = currentTeam[indexPath.row - 1][4]
                     return cell
                     
-                case (5, 1...currentTeam.count):
+                case (5, 1...currentRange):
                     let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
                     cell.scoreLabel.text = currentTeam[indexPath.row - 1][5]
                     return cell
                     
-                case (6, 1...currentTeam.count):
+                case (6, 1...currentRange):
                     let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
                     cell.scoreLabel.text = currentTeam[indexPath.row - 1][6]
                     return cell
                     
-                case (7, 1...currentTeam.count):
+                case (7, 1...currentRange):
                     let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
                     cell.scoreLabel.text = currentTeam[indexPath.row - 1][7]
                     return cell
