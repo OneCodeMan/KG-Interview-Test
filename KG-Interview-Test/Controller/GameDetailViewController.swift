@@ -74,9 +74,9 @@ class GameDetailViewController: UIViewController {
                     
                     // batting logic
                     let battingJSON = gameDetailJSON["batting"]
-                    let homeTeamName = gameDetailJSON["home_fname"]
-                    let awayTeamName = gameDetailJSON["away_fname"]
-                    self.teamNames = ["\(homeTeamName)", "\(awayTeamName)"]
+                    let homeTeamName = gameDetailJSON["home_fname"].stringValue
+                    let awayTeamName = gameDetailJSON["away_fname"].stringValue
+                    self.teamNames = [homeTeamName, awayTeamName]
                     
                     self.updateBattingData(battingJSON: battingJSON, teamNames: self.teamNames)
                     
@@ -129,7 +129,6 @@ class GameDetailViewController: UIViewController {
     }
     
     // MARK: Batting JSON logic
-    
     func updateBattingData(battingJSON: JSON, teamNames: [String]) {
         
         battingTeamPickerData = teamNames
