@@ -1,5 +1,5 @@
 //
-//  InningCells.swift
+//  SpreadsheetCells.swift
 //  KG-Interview-Test
 //
 //  Created by Dave Gumba on 2018-01-20.
