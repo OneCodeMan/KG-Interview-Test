@@ -46,7 +46,7 @@ class ListViewController: UIViewController {
         datePicker.addTarget(self, action: #selector(self.dateChanged), for: .valueChanged)
     }
     
-    // MARK: Date picker changed
+    // MARK: - Date picker changed
     @objc func dateChanged(_ sender: UIDatePicker) {
         
         gamesList = [] // restart gamesList whenever new date is selected
@@ -67,7 +67,7 @@ class ListViewController: UIViewController {
         }
     }
     
-    // MARK: Networking
+    // MARK: - Networking
     func getMLBGameListData(url: String) {
         
         Alamofire.request(url, method: .get)
@@ -92,7 +92,7 @@ class ListViewController: UIViewController {
             }
     }
     
-    // MARK: JSON Parsing
+    // MARK: - JSON Parsing
     func updateGameData(gamesJSON: JSON) {
         
         let onlyOneGame = gamesJSON["home_team_name"] != JSON.null
@@ -142,6 +142,7 @@ class ListViewController: UIViewController {
 
 }
 
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

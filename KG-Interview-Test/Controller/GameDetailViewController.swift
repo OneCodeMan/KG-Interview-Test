@@ -15,7 +15,7 @@ class GameDetailViewController: UIViewController {
     
     @IBOutlet weak var networkCallFailView: UIView!
     
-    // MARK: Inning by inning variables
+    // MARK: - Inning by inning variables
     @IBOutlet weak var inningSpreadsheetView: SpreadsheetView!
     var inningInfoHeaders = [""]
     var homeTeamName = ""
@@ -23,7 +23,7 @@ class GameDetailViewController: UIViewController {
     var awayTeamName = ""
     var awayTeamInnings = [Int]()
     
-    // MARK: Batting variables
+    // MARK: - Batting variables
     @IBOutlet weak var battingTeamPicker: UIPickerView!
     @IBOutlet weak var battingSpreadsheetView: SpreadsheetView!
     var battingTeamPickerData = [String]()
@@ -63,7 +63,7 @@ class GameDetailViewController: UIViewController {
         }
     }
     
-    // MARK: API call
+    // MARK: - API call
     func getMLBGameDetailData(url: String) {
         
         Alamofire.request(url, method: .get)
@@ -92,7 +92,7 @@ class GameDetailViewController: UIViewController {
             }
     }
     
-    // MARK: Innings JSON logic
+    // MARK: - Innings JSON logic
     func updateInningData(gameDetailJSON: JSON) {
         
         // inning by inning data extraction
@@ -134,7 +134,7 @@ class GameDetailViewController: UIViewController {
         
     }
     
-    // MARK: Batting JSON logic
+    // MARK: - Batting JSON logic
     func updateBattingData(battingJSON: JSON, teamNames: [String]) {
         
         battingTeamPickerData = teamNames
@@ -186,6 +186,7 @@ class GameDetailViewController: UIViewController {
 
 }
 
+// MARK: - SpreadsheetViewDataSource, SpreadsheetViewDelegate
 extension GameDetailViewController: SpreadsheetViewDataSource, SpreadsheetViewDelegate {
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, widthForColumn column: Int) -> CGFloat {
@@ -336,6 +337,7 @@ extension GameDetailViewController: SpreadsheetViewDataSource, SpreadsheetViewDe
     
 }
 
+// MARK: - UIPickerViewDelegate, UIPickerViewDataSource
 extension GameDetailViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
