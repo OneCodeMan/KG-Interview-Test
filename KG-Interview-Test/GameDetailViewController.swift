@@ -25,7 +25,12 @@ class GameDetailViewController: UIViewController {
     @IBOutlet weak var battingTeamPicker: UIPickerView!
     @IBOutlet weak var battingSpreadsheetView: SpreadsheetView!
     var battingTeamPickerData = [String]()
+    var battingTeamPickerIndex = 0
     var battingInfoHeaders = ["Name", "AB", "R", "H", "RBI", "BB", "SO", "AVG"]
+    var teamNames = [String]()
+    var homeTeamBatters = [[String]]()
+    var awayTeamBatters = [[String]]()
+    var batters = [[[String]]]()
     
     var gameDataDirectoryURL: String?
 
@@ -49,14 +54,12 @@ class GameDetailViewController: UIViewController {
         battingSpreadsheetView.register(TitleCell.self, forCellWithReuseIdentifier: "TitleCell")
         battingSpreadsheetView.register(ScoreCell.self, forCellWithReuseIdentifier: "ScoreCell")
         
-        
         if let gameDataDirectoryURL = gameDataDirectoryURL {
             getMLBGameDetailData(url: gameDataDirectoryURL)
         }
     }
     
     // MARK: API call
-    
     func getMLBGameDetailData(url: String) {
         
         Alamofire.request(url, method: .get)
@@ -73,9 +76,9 @@ class GameDetailViewController: UIViewController {
                     let battingJSON = gameDetailJSON["batting"]
                     let homeTeamName = gameDetailJSON["home_fname"]
                     let awayTeamName = gameDetailJSON["away_fname"]
-                    let teamNames = ["\(homeTeamName)", "\(awayTeamName)"]
+                    self.teamNames = ["\(homeTeamName)", "\(awayTeamName)"]
                     
-                    self.updateBattingData(battingJSON: battingJSON, teamNames: teamNames)
+                    self.updateBattingData(battingJSON: battingJSON, teamNames: self.teamNames)
                     
                 } else {
                     print("Network call failed")
@@ -84,7 +87,6 @@ class GameDetailViewController: UIViewController {
     }
     
     // MARK: Innings JSON logic
-    
     func updateInningData(gameDetailJSON: JSON) {
         
         // inning by inning data extraction
@@ -129,8 +131,53 @@ class GameDetailViewController: UIViewController {
     // MARK: Batting JSON logic
     
     func updateBattingData(battingJSON: JSON, teamNames: [String]) {
+        
         battingTeamPickerData = teamNames
         battingTeamPicker.reloadAllComponents()
+        
+        if let batterListJSON = battingJSON.array {
+            
+            let homeTeamBattersJSON = batterListJSON[0]["batter"].array ?? []
+            let awayTeamBattersJSON = batterListJSON[1]["batter"].array ?? []
+            
+            for homeTeamBatter in homeTeamBattersJSON {
+                
+                let batterName = homeTeamBatter["name"].stringValue,
+                    batterAB = homeTeamBatter["ab"].stringValue,
+                    batterR = homeTeamBatter["r"].stringValue,
+                    batterH = homeTeamBatter["h"].stringValue,
+                    batterRBI = homeTeamBatter["rbi"].stringValue,
+                    batterBB = homeTeamBatter["bb"].stringValue,
+                    batterSO = homeTeamBatter["so"].stringValue,
+                    batterAVG = homeTeamBatter["avg"].stringValue
+                
+                let homeTeamBatterInstance = [batterName, batterAB, batterR, batterH, batterRBI, batterBB, batterSO, batterAVG]
+                homeTeamBatters.append(homeTeamBatterInstance)
+                
+            }
+            
+            for awayTeamBatter in awayTeamBattersJSON {
+                
+                let batterName = awayTeamBatter["name"].stringValue,
+                batterAB = awayTeamBatter["ab"].stringValue,
+                batterR = awayTeamBatter["r"].stringValue,
+                batterH = awayTeamBatter["h"].stringValue,
+                batterRBI = awayTeamBatter["rbi"].stringValue,
+                batterBB = awayTeamBatter["bb"].stringValue,
+                batterSO = awayTeamBatter["so"].stringValue,
+                batterAVG = awayTeamBatter["avg"].stringValue
+                
+                let awayTeamBatterInstance = [batterName, batterAB, batterR, batterH, batterRBI, batterBB, batterSO, batterAVG]
+                awayTeamBatters.append(awayTeamBatterInstance)
+                
+            }
+            
+            batters = [homeTeamBatters, awayTeamBatters]
+            battingSpreadsheetView.reloadData()
+            
+            
+        }
+        
     }
 
 }
@@ -141,7 +188,7 @@ extension GameDetailViewController: SpreadsheetViewDataSource, SpreadsheetViewDe
         if spreadsheetView == inningSpreadsheetView {
             return 40
         } else {
-            return 70
+            return 110
         }
     }
     
@@ -166,7 +213,15 @@ extension GameDetailViewController: SpreadsheetViewDataSource, SpreadsheetViewDe
     }
     
     func numberOfRows(in spreadsheetView: SpreadsheetView) -> Int {
-        return 3
+        if spreadsheetView == inningSpreadsheetView {
+            return 3
+        } else {
+            
+            if !homeTeamBatters.isEmpty && !awayTeamBatters.isEmpty {
+                return homeTeamBatters.count
+            }
+        }
+        return 1
     }
     
     func frozenRows(in spreadsheetView: SpreadsheetView) -> Int {
@@ -215,14 +270,59 @@ extension GameDetailViewController: SpreadsheetViewDataSource, SpreadsheetViewDe
             }
         } else {
             // batting spreadsheet
-            
-            switch (indexPath.column, indexPath.row) {
-            case (0...battingInfoHeaders.count, 0):
-                let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "TitleCell", for: indexPath) as! TitleCell
-                cell.titleLabel.text = battingInfoHeaders[indexPath.column]
-                return cell
-            default:
-                return nil
+            if !homeTeamBatters.isEmpty && !awayTeamBatters.isEmpty {
+                
+                let currentTeam = batters[battingTeamPickerIndex]
+                
+                switch (indexPath.column, indexPath.row) {
+                case (0...battingInfoHeaders.count, 0):
+                    let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "TitleCell", for: indexPath) as! TitleCell
+                    cell.titleLabel.text = battingInfoHeaders[indexPath.column]
+                    return cell
+                    
+                case (0, 1...currentTeam.count):
+                    let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
+                    cell.scoreLabel.text = currentTeam[indexPath.row][0]
+                    return cell
+                    
+                case (1, 1...currentTeam.count):
+                    let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
+                    cell.scoreLabel.text = currentTeam[indexPath.row][1]
+                    return cell
+                    
+                case (2, 1...currentTeam.count):
+                    let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
+                    cell.scoreLabel.text = currentTeam[indexPath.row][2]
+                    return cell
+                    
+                case (3, 1...currentTeam.count):
+                    let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
+                    cell.scoreLabel.text = currentTeam[indexPath.row][3]
+                    return cell
+                    
+                case (4, 1...currentTeam.count):
+                    let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
+                    cell.scoreLabel.text = currentTeam[indexPath.row][4]
+                    return cell
+                    
+                case (5, 1...currentTeam.count):
+                    let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
+                    cell.scoreLabel.text = currentTeam[indexPath.row][5]
+                    return cell
+                    
+                case (6, 1...currentTeam.count):
+                    let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
+                    cell.scoreLabel.text = currentTeam[indexPath.row][6]
+                    return cell
+                    
+                case (7, 1...currentTeam.count):
+                    let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
+                    cell.scoreLabel.text = currentTeam[indexPath.row][7]
+                    return cell
+                    
+                default:
+                    return nil
+                }
             }
         }
     
@@ -248,6 +348,11 @@ extension GameDetailViewController: UIPickerViewDelegate, UIPickerViewDataSource
         }
         
         return "Loading data..."
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        battingTeamPickerIndex = row
+        battingSpreadsheetView.reloadData()
     }
     
 }
